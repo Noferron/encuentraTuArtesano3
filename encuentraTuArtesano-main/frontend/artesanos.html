@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.artesanos.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="gridFront">
+        <header>
+            <h1 class="presentacion">Crear tu página de presentación e incluye tus productos</h1>
+        
+        </header>
+        <nav class="auth-nav" id="authNav">
+                                <!-- 🔄 Este contenido se genera dinámicamente por JavaScript -->
+        </nav>
+
+
+        
+            <section class="auth-section" id="authSection">
+                    <div class="auth-container">
+                        <div class="auth-form" id="loginForm">
+                            <h3>🔑 Iniciar Sesión</h3>
+                            
+                            <form id="loginFormElement">
+                                <div class="form-group">
+                                    <label for="loginEmail">Email:</label>
+                                    <input type="email" id="loginEmail" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="loginPassword">Contraseña:</label>
+                                    <input type="password" id="loginPassword" required>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                            </form>
+                            
+                            <p class="auth-toggle">
+                                ¿No tienes cuenta? 
+                                <a href="#" id="showRegister">Regístrate aquí</a>
+                            </p>
+                        </div>
+
+                        <div class="auth-form hidden" id="registerForm">
+                            <h3>📝 Crear Cuenta</h3>
+                            
+                            <form id="registerFormElement">
+                                <div class="form-group">
+                                    <label for="registerNombre">Nombre de tu tienda:</label>
+                                    <input type="text" id="registerNombre" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="registerEmail">Email:</label>
+                                    <input type="email" id="registerEmail" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="registerPassword">Contraseña:</label>
+                                    <input type="password" id="registerPassword" required>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Crear Cuenta</button>
+                            </form>
+                            
+                            <p class="auth-toggle">
+                                ¿Ya tienes cuenta? 
+                                <a href="#" id="showLogin">Inicia sesión aquí</a>
+                            </p>
+                        </div>
+                    </div>
+                            
+                    
+            </section>
+            <aside>       
+                <section  id="presentacion">
+                    <form class="hidden" id="formularioPresentacion">
+                        <label for="logo_url">Enlace de tu logo</label>
+                        <input type="url" id="logo_url" placeholder="Sube un enlace de la imagen de tu logo de tu drive, web u otro sitio donde lo tengas subido">
+                        <br>
+                        <label for="nombreP">Nombre</label>
+                        <input type="text" id="nombreP" required placeholder="nombre de tu tienda">
+                        <br>
+                        <label for="descripcionP">Presentacion</label>
+                        <input type="text" id="descripcionP" placeholder="Escribe una presentacion" required>
+                        <br>
+                        <label for="localizacion">Dirección</label>
+                        <input type="text" id="localizacion" placeholder="dirección">
+                        <br>
+                        <label for="categoriaP">Categoria</label>
+                        <input type="text" id="categoriaP" placeholder="velas, cerámica, pintura,..." required>
+                        <br>
+                        <label for="instagram_url">Enlace a instagram</label>
+                        <input type="url" id="instagram_url" placeholder="" >
+                        <br>
+                        <label for="tienda_url">Enlace a tu tienda</label>
+                        <input type="url" id="tienda_url" placeholder="www.artesano...">
+                        <br>
+                        <label for="facebook_url">Enlace a facebook</label>
+                        <input type="url" id="facebook_url" placeholder="https://www.facebook/artenanos...">
+                        <br>
+                        <label for="comentarios_url">Enlace a los comentarios de tus clientes</label>
+                        <input type="url" id="comentarios_url" placeholder="https://www.facebook/artenanos...">
+                        <br>
+                        <label for="activoP">¿Estás activo?</label>
+                        <input type="checkbox" id="activoP">
+                        <br>
+                        <button type="submit" id="crearPresentacion">Crear presentación</button>
+                    </form>
+                </section>
+
+
+                <section  id="cargarDatos" >
+                    <form class="hidden" id="formulario">
+                        <label for="nombre">Nombre del producto</label>
+                        <input type="text" id="nombre" required placeholder="nombre del producto">
+                        <br>
+                        <label for="descripcion">Descripción del producto</label>
+                        <input type="text" id="descripcion" placeholder="Escribe una descripción de tu producto">
+                        <br>
+                        <label for="imagen_url">Imagen</label>
+                        <input type="url" id="imagen_url" placeholder="www.imagen...">
+                        <br>
+                        <label for="categoria">Categoria</label>
+                        <input type="text" id="categoria" placeholder="velas, cerámica, pintura,... (1 por producto)">
+                        <br>
+                        <label for="precio">Precio</label>
+                        <input type="number" id="precio" placeholder="Ejemplo: 12.25" required>
+                        <br>
+                        <label for="stock">Stock</label>
+                        <input type="number" id="stock" placeholder="25" required>
+                        <br>
+                        <label for="comprar_url">Enlace a tu tienda</label>
+                        <input type="url" id="comprar_url" placeholder="//www.artenanos...">
+                        <br>
+                        <label for="activo">¿Está activo este producto?</label>
+                        <input type="checkbox" id="activo">
+                        <br>
+                        <button type="submit" id="crearProducto">Crear producto</button>
+                    
+                    </form>
+                </section>
+        </aside>
+
+        <main>
+            <button id="verProductos">Ver Productos</button> 
+            <button id="verPresentacion">Ver Presentaciones</button>
+            
+            
+                <div id="activo?"> 
+                    <div id="artesanos"></div>
+                </div>
+                <div id="productos"></div>
+        </main>
+    </div>
+    <script type="module" src="cargarBBDD.js"></script>
+    <script type="module" src="login.js"></script>
+</body>
+</html>

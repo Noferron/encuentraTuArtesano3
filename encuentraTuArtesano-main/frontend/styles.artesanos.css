@@ -1,0 +1,209 @@
+header{
+  background:rgb(231, 185, 152);
+  border-radius: 1dvh;
+  padding: 2dvh;
+  
+}
+.auth-nav{
+  text-align: center;
+  max-width: fit-content;
+  max-height: fit-content; 
+ 
+}
+
+.presentacion{
+    display: contents;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.gridFront{
+   display: grid;
+  grid-template-areas:
+    "header header "
+    "login login"
+    "auth auth"
+    "aside main"
+    "aside main";
+    grid-template-columns: 50vmin 1fr;
+    grid-template-rows: auto 1fr;
+    min-height: 100vmin;
+}
+
+header{ grid-area:header;}
+nav{grid-area:auth;}
+.auth-section{grid-area:login;}
+aside{grid-area:aside;
+max-width: fit-content;
+}
+main{grid-area:main;
+}
+button{
+  padding: 2vmin;
+  border-radius: 1vmin;
+  background-color: #f5f3effa;
+  border: 1px solid #e2e8f0;
+}
+button:hover{
+   transform:translateY(-0.1vmin);
+   box-shadow:0.7rem 0.3rem 0.8rem 0px rgba(114, 113, 113, 0.75);
+
+}
+a:hover{
+  max-width: fit-content;
+   box-shadow:0.7rem 0.3rem 0.8rem 0px rgba(114, 113, 113, 0.75);
+}
+input:hover{
+  
+   transform:translateY(-0.1vmin);
+   box-shadow:0.7rem 0.3rem 0.8rem 0px rgba(114, 113, 113, 0.75);
+}
+#formularioPresentacion{
+  
+  max-width: 30vmin;
+    margin: 0 auto;
+    background:     #cf8e145b;
+
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+#formulario{
+    
+    max-width: 30vmin;
+    margin: 0 auto;
+    background:     #cf8e145b;
+
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+        
+}
+label{
+    text-align: center;
+    margin-bottom: 20px;
+    color: chocolate;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+input{
+    width: 85%;
+    padding: 10px;
+    border: 4px solid #e0dacb;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: border-color 0.5s ease;
+    
+}
+
+
+
+input:focus{
+    outline: none;
+    border-color: #e1a942;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+
+.auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.auth-form {
+  background: #eedec0;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.auth-form h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: chocolate;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: rgb(211, 130, 72);
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e0dacb;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #e1a942;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.auth-toggle {
+  text-align: center;
+  margin-top: 15px;
+  color: #666;
+}
+
+.auth-toggle a {
+  color: chocolate;
+  text-decoration: none;
+}
+
+.auth-toggle a:hover {
+  text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+.product-image{
+  max-width: 15vmin;
+  max-height: 15vmin;
+}
+.grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  display:flex;
+  flex-direction: column;
+}
+.product-card{
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 0.1rem;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction:column;
+  gap: 0.2rem;
+  
+}
+.logo{
+    max-height: 10dvh;
+    max-width: 10dvh;
+}
+.product-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.product-card p {
+  font-size: 1.5rem;
+  color: #4b5563;
+}
+
+/* Precio destacado */
+.product-card p strong {
+  font-size: 1.2rem;
+  color: #16a34a;
+}
