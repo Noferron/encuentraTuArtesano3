@@ -170,6 +170,8 @@ async function actualizarPresentacion(id, datosActualizados) {
 const user = JSON.parse(localStorage.getItem("user"));
     const artesanoId = user?.id;
 //--------------------Petición GET: Mostrar los datos y cómo se ven-------------------------------
+
+let presentacionCargada=[];
 async function cargarPresentacion(artesanoId) {
     const token = obtenerToken();
     if (!token) {
@@ -189,7 +191,8 @@ async function cargarPresentacion(artesanoId) {
 
         if (respuesta.ok) {
             // Aquí ya recibes SOLO la presentación del artesano autenticado
-            mostrarArtesanos(datos.data);
+            presentacionCargada=datos.data;
+            mostrarArtesanos(presentacionCargada);
         } else {
             console.error("Error al cargar presentación:", datos.message);
         }
@@ -200,13 +203,14 @@ async function cargarPresentacion(artesanoId) {
 }
 
 // Función para mostrar los presentaciones 
+const contenedorP = document.getElementById("artesanos");
 
-async function mostrarArtesanos(lista){
-    const contenedor = document.getElementById("artesanos");
+async function mostrarArtesanos(presentacionCargada){
+    
 
-    console.log("Valor recibido en mostrarArtesanos:", lista);
+
     // Creamos el HTML para cada producto
-    contenedor.innerHTML = lista.map(presentacion=> `
+    contenedorP.innerHTML = presentacionCargada.map(presentacion=> `
         <div class="product-card">
 
             <h3>${presentacion.nombre} (ID: ${presentacion.id})</h3>
@@ -307,7 +311,7 @@ function crearProducto(){
 }
 
 //---------------GET productos--------------------------------------------------------
-
+let productosCargados=[];
 async function cargarProductos(artesanoId) {
     const token = obtenerToken();
     if (!token) {
@@ -326,10 +330,12 @@ async function cargarProductos(artesanoId) {
         const datos = await respuesta.json();
 
         if (respuesta.ok) {
-            // Aquí ya recibes SOLO la presentación del artesano autenticado
-            mostrarProductos(datos.data);
+            // Aquí ya recibes SOLO los productos del artesano autenticado
+            productosCargados=datos.data;
+            mostrarProductos(productosCargados);
+            
         } else {
-            console.error("Error al cargar presentación:", datos.message);
+            console.error("Error al cargar productos:", datos.message);
         }
     } catch (error) {
         console.error("Error de conexión:", error);
@@ -398,13 +404,13 @@ async function editandoProducto(elementoBoton) {
 
 // Funcion para mostrar productos 
 
-
-async function mostrarProductos(lista){
-    const contenedor = document.getElementById("productos");
+const contenedor = document.getElementById("productos");
+async function mostrarProductos(productosCargados){
+    
 
   
     // Creamos el HTML para cada producto
-    contenedor.innerHTML = lista.map(producto=> `
+    contenedor.innerHTML = productosCargados.map(producto=> `
         <div class="grid">
            
             <div class="product-card">
@@ -453,17 +459,68 @@ async function mostrarProductos(lista){
 }
 
 const verProductos = document.getElementById("verProductos");
+const ocultarProductos = document.getElementById("ocultarProductos");
+const verProductosActivos = document.getElementById("VerProductosActivos");
+
+verProductosActivos.addEventListener("click", () =>{
+    // Declaramos una variable donde guardaremos el resultado de la busqueda dentro del array
+    const activos = productosCargados.filter(p => p.activo == 1);
+    // Llamamos a la función mostrarProductos con el parámetro que llenamos con la busqueda
+    mostrarProductos(activos);
+    verProductosActivos.classList.add('hidden');
+    verProductos.classList.remove('hidden');
+    
+});
+
 
 verProductos.addEventListener("click", () =>{
     cargarProductos(artesanoId);
+    verProductos.classList.add('hidden');
+    ocultarProductos.classList.remove('hidden');
+    contenedor.classList.remove('hidden');
+    verProductosActivos.classList.remove('hidden');
+    console.log("Contenido de lista:", productosCargados);
+
 });
+
+ocultarProductos.addEventListener("click", () =>{
+    verProductos.classList.remove('hidden');
+    ocultarProductos.classList.add('hidden');
+    contenedor.classList.add('hidden');
+    verProductosActivos.classList.add('hidden');
+})
 
 
 const verPresentacion = document.getElementById("verPresentacion");
+const ocultarPresentacion =document.getElementById("ocultarPresentacion");
+const verPresentacionActiva = document.getElementById("verPresentacionActiva");
 
 verPresentacion.addEventListener("click", () =>{
     cargarPresentacion(artesanoId);
+    ocultarPresentacion.classList.remove('hidden');
+    verPresentacion.classList.add('hidden');
+    contenedorP.classList.remove('hidden');
+    verPresentacionActiva.classList.remove('hidden');
+    
 });
+
+ocultarPresentacion.addEventListener("click", () =>{
+    verPresentacion.classList.remove('hidden');
+    ocultarPresentacion.classList.add('hidden');
+    contenedorP.classList.add('hidden');
+    verPresentacionActiva.classList.add('hidden');
+});
+
+verPresentacionActiva.addEventListener("click", () =>{
+    // Declaramos una variable donde guardaremos el resultado de la busqueda dentro del array
+    const activos = presentacionCargada.filter(p => p.activo == 1);
+    // Llamamos a la función mostrarProductos con el parámetro que llenamos con la busqueda
+    mostrarArtesanos(activos);
+    verProductosActivos.classList.add('hidden');
+    verProductos.classList.remove('hidden');
+    
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
     crearProducto();

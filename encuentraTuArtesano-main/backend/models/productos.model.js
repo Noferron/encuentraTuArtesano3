@@ -22,6 +22,14 @@ export async function obtenerProductos(artesanoId){
   return result;
 }
 
+//-------------------GET productos para clientes----------------------------------------------------------------------------------------------
+export async function cargarProductos(){
+  const [result] = await pool.query(
+    `SELECT id, nombre, descripcion, imagen_url, categoria, precio, stock, comprar_url, activo, artesano_id
+    FROM productos `
+  );
+  return result;
+}
 //-------------------PUT productos------------------------------------------------------------------------------------------------------------
 export async function modificarProducto(id,{nombre, descripcion, imagenUrl, categoria,precio,stock,comprarUrl,activo}) {
    const [result] = await pool.query(

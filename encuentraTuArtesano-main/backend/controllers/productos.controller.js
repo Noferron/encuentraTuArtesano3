@@ -46,6 +46,29 @@ export async function cargarProductos (req,res){
   }
 }
 
+//-------GET para clientes---------------------
+export async function cargarProductosClientes (req,res){
+  try{
+
+    const productos = await productosModel.cargarProductos();
+
+    res.status(200).json({
+      success:true,
+      message: `Productos encontrados`,
+      data: productos
+    });
+  }
+  catch (error){
+    console.error (`Error al obtener productos`,error)
+    res.status(500).json({
+      success:false,
+      message: `Error interno del servidor al obtener productos`,
+      error: error.message
+    });
+    
+  }
+}
+
 //--------PUT----------------------------------
 
 export async function editarProducto(req, res) {
