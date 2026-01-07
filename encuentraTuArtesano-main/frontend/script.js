@@ -51,9 +51,9 @@ const filtroPresentacion = document.getElementById("categoriaP");
 function filtrarPorCategoria(presentacionesCargadas){
 
     // Categorías únicas
-    const categoriasUnicas = [...new Set(
+    /*const categoriasUnicas = [...new Set(
         presentacionesCargadas.map(p => p.categoria)
-    )];
+    )];*/
 
  filtroPresentacion.innerHTML= presentacionesCargadas.map(presentacion=>`
     
@@ -105,9 +105,9 @@ function filtrarPorCategoriaProducto(productosCargados){
     
     productosOriginales = productosCargados;
     // Categorías únicas
-    const categoriasUnicas = [...new Set(
+   /* const categoriasUnicas = [...new Set(
         productosCargados.map(p => p.categoria)
-    )];
+    )];*/
 
    filtroProducto.innerHTML= productosCargados.map(producto=>`
         <option value="${producto.categoria}">${producto.categoria}</option>`).join('');
@@ -120,15 +120,12 @@ function filtrarPorCategoriaProducto(productosCargados){
     
 
     filtroProducto.addEventListener("change",()=>{
-        const categoriaSeleccionada =filtroProducto.value;
-        const categoria =categoriaSeleccionada === "all"
-        ? productosOriginales
-        : productosOriginales.filter(
-            p => p.categoria === categoriaSeleccionada
-        );
+       const categoriaSeleccionada =filtroProducto.value;
+        const categoria = productosCargados.filter(p=> p.categoria === categoriaSeleccionada);
 
-        mostrarProductos(categoria);
+        mostrarArtesanos(categoria);
     });  
+     
  }
 
 async function mostrarProductos(productosCargados){
