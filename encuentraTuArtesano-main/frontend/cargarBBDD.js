@@ -22,6 +22,7 @@ async function cargarDatos(nombre, descripcion, imagenUrl, categoria, precio, st
     }
 
      try{
+        console.log(nombre, descripcion, imagenUrl, categoria, precio, stock, comprarUrl, activo,artesanoId);
          const respuesta = await fetch (`${URL_API}/productos`,{
             method: 'POST',
              headers: {
@@ -29,7 +30,7 @@ async function cargarDatos(nombre, descripcion, imagenUrl, categoria, precio, st
                 // 🔑 CLAVE: Añadir el header Authorization con el token.
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify(datosEnvio)
+            body: JSON.stringify({nombre, descripcion, imagenUrl, categoria, precio, stock, comprarUrl, activo,artesanoId})
 
 
         });
@@ -52,7 +53,7 @@ async function crearPresentacion(nombre,descripcion,localizacion,categoria,insta
     }
 
     try{
-        const respuesta = await fetch (`${URL_API}/artesanos`,{
+        const respuesta = await fetch (`${URL_API}/artesanos/:id`,{
             method: 'POST',
             headers: { 
                 'Content-Type':'application/json',
@@ -436,14 +437,14 @@ async function mostrarProductos(productosCargados){
                  <button 
 
                 class="editarProducto"
-                data-idvalor="${producto.id}"
-                data-nombrevalor="${producto.nombre || ''}"
-                data-descripcionvalor="${producto.descripcion || ''}"
-                data-imagenurlvalor="${producto.imagen_url || ''}"
-                data-categoriavalor="${producto.categoria || ''}"
-                data-preciovalor="${producto.precio || ''}"
-                data-stockvalor="${producto.stock || ''}"
-                data-comprarurlvalor="${producto.comprar_url || ''}"
+                data-idvalor=${producto.id}
+                data-nombrevalor=${producto.nombre}
+                data-descripcionvalor=${producto.descripcion}
+                data-imagenurlvalor=${producto.imagen_url}
+                data-categoriavalor=${producto.categoria}
+                data-preciovalor=${producto.precio}
+                data-stockvalor=${producto.stock}
+                data-comprarurlvalor=${producto.comprar_url}
                 >✏ Editar producto </button>
 
                 </div>

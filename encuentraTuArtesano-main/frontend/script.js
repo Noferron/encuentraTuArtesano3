@@ -1,6 +1,6 @@
 URL_API = "http://localhost:3000/api";
 
-
+let presentacionesCargadas=[];
 async function cargarArtesanos() {
     try{
         //Traemos los datos del back
@@ -9,7 +9,9 @@ async function cargarArtesanos() {
         const datos = await respuesta.json();
         //Verificamos si fue exitosa la petición
         if(respuesta.ok){
-            mostrarArtesanos(datos.data);
+            presentacionesCargadas=datos.data;
+            mostrarArtesanos(presentacionesCargadas);
+            filtrarPorCategoria(presentacionesCargadas);
         }
         else{
             console.error ("Error al cargar artesanos");
@@ -33,6 +35,7 @@ async function cargarProductos() {
             // Aquí ya recibes SOLO los productos del artesano autenticado
             productosCargados=datos.data;
             mostrarProductos(productosCargados);
+            filtrarPorCategoriaProducto(productosCargados);
             
         } else {
             console.error("Error al cargar productos:", datos.message);
@@ -43,12 +46,37 @@ async function cargarProductos() {
     }
 }
 
+const filtroPresentacion = document.getElementById("categoriaP");
 
-function mostrarArtesanos(lista){
+function filtrarPorCategoria(presentacionesCargadas){
+
+    // Categorías únicas
+    const categoriasUnicas = [...new Set(
+        presentacionesCargadas.map(p => p.categoria)
+    )];
+
+ filtroPresentacion.innerHTML= presentacionesCargadas.map(presentacion=>`
+    
+    <option value='${presentacion.categoria}'>${presentacion.categoria}</option>`).join('');
+
+    
+
+    filtroPresentacion.addEventListener("change",()=>{
+        const categoriaSeleccionada =filtroPresentacion.value;
+        const categoriaP = presentacionesCargadas.filter(p=> p.categoria === categoriaSeleccionada);
+
+        mostrarArtesanos(categoriaP);
+        
+
+});  
+ }
+
+function mostrarArtesanos(presentacionesCargadas){
     const contenedor = document.getElementById("artesanos");
 
+   
     // Creamos el HTML para cada producto
-    contenedor.innerHTML = lista.map(presentacion=> `
+    contenedor.innerHTML = presentacionesCargadas.map(presentacion=> `
         <div class="product-card">
            <a href="${presentacion.tiendaUrl}"> <img src="${presentacion.logoUrl}" class="product-image" alt="${presentacion.nombre}"></a>
             <p>${presentacion.descripcion}</p>
@@ -58,11 +86,56 @@ function mostrarArtesanos(lista){
             <p> ${presentacion.categoria}</p>
         </div>
         `).join ('');
+
+    
+
+     
 }
 
+
+
+ 
+
+
 const contenedor = document.getElementById("productos");
+const filtroProducto = document.getElementById("categoria");
+
+let productosOriginales = [];
+function filtrarPorCategoriaProducto(productosCargados){
+    
+    productosOriginales = productosCargados;
+    // Categorías únicas
+    const categoriasUnicas = [...new Set(
+        productosCargados.map(p => p.categoria)
+    )];
+
+   filtroProducto.innerHTML= productosCargados.map(producto=>`
+        <option value="${producto.categoria}">${producto.categoria}</option>`).join('');
+       /* filtroProducto.innerHTML = `
+        <option value="all">Todas</option>
+        ${categoriasUnicas.map(cat => `
+            <option value="${cat}">${cat}</option>
+        `).join('')}
+    `;*/
+    
+
+    filtroProducto.addEventListener("change",()=>{
+        const categoriaSeleccionada =filtroProducto.value;
+        const categoria =categoriaSeleccionada === "all"
+        ? productosOriginales
+        : productosOriginales.filter(
+            p => p.categoria === categoriaSeleccionada
+        );
+
+        mostrarProductos(categoria);
+    });  
+ }
+
 async function mostrarProductos(productosCargados){
     
+    filtroProducto.innerHTML = productosCargados.map(producto=>`
+        <option>${producto.categoria}</option>
+        `).join('');
 
   
     // Creamos el HTML para cada producto
@@ -89,10 +162,11 @@ async function mostrarProductos(productosCargados){
           
         `).join ('');
 
-        document.querySelectorAll(".editarProducto").forEach(boton => {
-            boton.addEventListener("click", () => editandoProducto(boton));   
-        });
+       
 }
+
+
+
 const verProductosActivos = document.getElementById("VerProductosActivos");
 
 /*verProductosActivos.addEventListener("click", () =>{

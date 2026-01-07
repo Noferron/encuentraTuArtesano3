@@ -35,7 +35,7 @@ export async function crearPresentacion(req, res) {
     const { artesanoId } = req.body;
 
     // 1️⃣ Verificar si ya existe una presentación para este artesano
-    const presentacionExistente = await presentacionesModel.obtenerPresentacion(artesanoId);
+    const presentacionExistente = await artesanosModel.obtenerTodos(artesanoId);
 
     if (presentacionExistente) {
       return res.status(400).json({
@@ -45,7 +45,7 @@ export async function crearPresentacion(req, res) {
     }
 
     // 2️⃣ Si no existe, crear la nueva
-    const nuevaPresentacion = await presentacionesModel.crearPresentacion(req.body);
+    const nuevaPresentacion = await artesanosModel.subirPresentacion(req.body);
 
     res.status(201).json({
       success: true,
