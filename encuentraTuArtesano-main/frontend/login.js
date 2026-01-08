@@ -110,6 +110,7 @@ function mostrarInterfaz() {
   const authNav     = document.getElementById('authNav'); // si lo tienes
   const formulario = document.getElementById('formulario');
   const formularioPresentacion = document.getElementById('formularioPresentacion')
+  const main = document.getElementById('main');
 
   const logged = !!estado.usuario;
 
@@ -144,12 +145,14 @@ function mostrarInterfaz() {
       formularioPresentacion.classList.add('hidden');
       artesanos.classList.add("hidden");
       productos.classList.add("hidden");
+      main.classList.add('hidden');
     }
     else{
       formulario.classList.remove('hidden');
       formularioPresentacion.classList.remove('hidden');
       artesanos.classList.remove("hidden");
       productos.classList.remove("hidden");
+      main.classList.remove('hidden');
     }
   }
 

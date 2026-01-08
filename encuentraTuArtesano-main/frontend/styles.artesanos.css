@@ -30,7 +30,9 @@ header{
     min-height: 100vmin;
 }
 
-header{ grid-area:header;}
+header{ grid-area:header;
+animation-name: headerAnimation;
+animation-duration: 4s;}
 nav{grid-area:auth;}
 .auth-section{grid-area:login;}
 aside{grid-area:aside;
@@ -206,4 +208,9 @@ input:focus{
 .product-card p strong {
   font-size: 1.2rem;
   color: #16a34a;
+}
+
+@keyframes headerAnimation{
+  0% {top:50dvh;}
+  100%{top:0;}
 }
