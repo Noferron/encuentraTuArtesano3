@@ -1,6 +1,25 @@
 URL_API = "http://localhost:3000/api";
 
-let presentacionesCargadas=[];
+//------GET PyP----------------------
+let PyPCargadas =[];
+
+async function cargarPyP() {
+    try{
+        const respuesta = await fetch (`${URL_API}/presentaciones`);
+        const datos = await respuesta.json();
+        if(respuesta.ok){
+            PyPCargadas= datos.data;
+            mostrarPyP(PyPCargadas);
+        }
+        else{
+            console.error("Error al cargar presentaciones y productos, error en el fetch");
+        }
+    }catch(error){
+        console.error("Error al cargar PyP");
+    }
+}
+
+/*let presentacionesCargadas=[];
 async function cargarArtesanos() {
     try{
         //Traemos los datos del back
@@ -45,7 +64,7 @@ async function cargarProductos() {
         document.getElementById("productos").innerHTML = "<p>Error al conectar con la API.</p>";
     }
 }
-
+*/
 const filtroPresentacion = document.getElementById("categoriaP");
 
 function filtrarPorCategoria(presentacionesCargadas){
@@ -71,7 +90,7 @@ function filtrarPorCategoria(presentacionesCargadas){
 });  
  }
 
-function mostrarArtesanos(presentacionesCargadas){
+/*function mostrarArtesanos(presentacionesCargadas){
     const contenedor = document.getElementById("artesanos");
 
    
@@ -91,7 +110,7 @@ function mostrarArtesanos(presentacionesCargadas){
 
      
 }
-
+*/
 
 
  
@@ -128,7 +147,7 @@ function filtrarPorCategoriaProducto(productosCargados){
      
  }
 
-async function mostrarProductos(productosCargados){
+/*async function mostrarProductos(productosCargados){
     
     filtroProducto.innerHTML = productosCargados.map(producto=>`
         <option>${producto.categoria}</option>
@@ -161,7 +180,7 @@ async function mostrarProductos(productosCargados){
 
        
 }
-
+*/
 
 
 const verProductosActivos = document.getElementById("VerProductosActivos");
@@ -176,13 +195,51 @@ const verProductosActivos = document.getElementById("VerProductosActivos");
     
 });*/
 
+function mostrarPyP(){
+    const contenedor = document.getElementById("artesanos");
+
+   
+    // Creamos el HTML para cada producto
+    contenedor.innerHTML = PyPCargadas.map(p=> `
+        <div class="product-card">
+           <a href="${p.tiendaUrl}"> <img src="${p.logoUrl}" class="product-image" alt="${p.nombre}"></a>
+            <p>${p.descripcion}</p>
+            <p><strong>${p.localizacion}</strong></p>
+            <a href="${p.instagramUrl}"><img class ="logo" src="../assets/intagram.png"></a>
+            <a href="${p.facebookUrl}"><img class ="logo" src="../assets/facebook.webp"></a>
+            <p> ${p.categoria}</p>
+
+            <div class="grid">
+           
+            <div class="product-card">
+     
+                <h3>${p.nombre} (ID: ${p.id})</h3>
+                
+                ${p.imagen_url ?`<a href="${p.imagen_url}"> 
+                    <img src="${p.imagen_url}" class="product-image" alt="${p.nombre}">
+                </a>`: '<img src="../assets/sinImagen.png" class="product-image" alt="Producto sin imagen">'}
+                <p><strong>Precio: </strong>${p.precio}€</p>
+                <p><strong>Stock: </strong>${p.stock}</p>
+                 <p><strong>Categoría: </strong>${p.categoria}</p>
+                
+                <h4>Enlace al producto en tu tienda:</h4>
+                <div class="enlaces-sociales">
+                <a href="${p.comprar_url}"><img class ="logo" src="../assets/tienda.jpg" title="tienda"></a>
+
+                </div>
+            </div>
+          
+        </div>
+        `).join ('');
+}
 
 // 🚀 Cuando la página termine de cargar, ejecutamos la función
 document.addEventListener("DOMContentLoaded", () => {
-    cargarArtesanos();
+   //cargarArtesanos();
     /*const activos = productosCargados.filter(p => p.activo == 1);
     mostrarProductos(activos);*/
-    cargarProductos();
+    //cargarProductos();
+    cargarPyP();
 });
 
 

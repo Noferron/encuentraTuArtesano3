@@ -5,5 +5,6 @@ const presentacionesRoutes = Router();
 
 
 presentacionesRoutes.get("/:artesanoId", presentacionesController.getPresentacion);
+presentacionesRoutes.get("/", presentacionesController.cargarPyP);
 
 export default presentacionesRoutes;
