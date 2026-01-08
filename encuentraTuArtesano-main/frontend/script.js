@@ -1,7 +1,7 @@
 URL_API = "http://localhost:3000/api";
 
 //------GET PyP----------------------
-let PyPCargadas =[];
+/*let PyPCargadas =[];
 
 async function cargarPyP() {
     try{
@@ -17,9 +17,9 @@ async function cargarPyP() {
     }catch(error){
         console.error("Error al cargar PyP");
     }
-}
+}*/
 
-/*let presentacionesCargadas=[];
+let presentacionesCargadas=[];
 async function cargarArtesanos() {
     try{
         //Traemos los datos del back
@@ -64,7 +64,7 @@ async function cargarProductos() {
         document.getElementById("productos").innerHTML = "<p>Error al conectar con la API.</p>";
     }
 }
-*/
+
 const filtroPresentacion = document.getElementById("categoriaP");
 
 function filtrarPorCategoria(presentacionesCargadas){
@@ -90,7 +90,7 @@ function filtrarPorCategoria(presentacionesCargadas){
 });  
  }
 
-/*function mostrarArtesanos(presentacionesCargadas){
+function mostrarArtesanos(presentacionesCargadas){
     const contenedor = document.getElementById("artesanos");
 
    
@@ -110,7 +110,7 @@ function filtrarPorCategoria(presentacionesCargadas){
 
      
 }
-*/
+
 
 
  
@@ -147,7 +147,7 @@ function filtrarPorCategoriaProducto(productosCargados){
      
  }
 
-/*async function mostrarProductos(productosCargados){
+function mostrarProductos(productosCargados){
     
     filtroProducto.innerHTML = productosCargados.map(producto=>`
         <option>${producto.categoria}</option>
@@ -180,7 +180,7 @@ function filtrarPorCategoriaProducto(productosCargados){
 
        
 }
-*/
+
 
 
 const verProductosActivos = document.getElementById("VerProductosActivos");
@@ -195,7 +195,7 @@ const verProductosActivos = document.getElementById("VerProductosActivos");
     
 });*/
 
-function mostrarPyP(){
+/*function mostrarPyP(){
     const contenedor = document.getElementById("artesanos");
 
    
@@ -231,15 +231,15 @@ function mostrarPyP(){
           
         </div>
         `).join ('');
-}
+}*/
 
 // 🚀 Cuando la página termine de cargar, ejecutamos la función
 document.addEventListener("DOMContentLoaded", () => {
-   //cargarArtesanos();
+   cargarArtesanos();
     /*const activos = productosCargados.filter(p => p.activo == 1);
     mostrarProductos(activos);*/
-    //cargarProductos();
-    cargarPyP();
+    cargarProductos();
+    //cargarPyP();
 });
 
 
